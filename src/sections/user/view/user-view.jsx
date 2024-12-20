@@ -96,7 +96,15 @@ export default function UserPage() {
 
   return (
     <Container maxWidth="xl">
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+      <Stack
+        direction="row"
+        sx={{
+          pt: 3,
+        }}
+        alignItems="center"
+        justifyContent="space-between"
+        mb={5}
+      >
         <Typography variant="h3">Invoice</Typography>
 
         <Button

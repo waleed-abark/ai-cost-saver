@@ -40,7 +40,7 @@ export default function Nav({ openNav, onCloseNav }) {
   const renderAccount = (
     <Box
       sx={{
-        my: 3,
+        my: 2,
         mx: 2.5,
         py: 2,
         px: 2.5,
@@ -61,7 +61,7 @@ export default function Nav({ openNav, onCloseNav }) {
   );
 
   const renderMenu = (
-    <Stack component="nav" spacing={5} sx={{ px: 2 }}>
+    <Stack component="nav" spacing={1} sx={{ px: 2 }}>
       {navConfig.map((item) => (
         <NavItem key={item.title} item={item} />
       ))}
