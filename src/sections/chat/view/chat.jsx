@@ -74,13 +74,13 @@ export default function ChatView() {
                   mt: index === 0 ? 0 : 5,
                 }}
               >
-                <Box>
+                <Box sx={{width:"250px"}}>
                   <Typography sx={{ fontSize: "14px" }}>{item.left.title}</Typography>
                   <Typography>
                     Value: <strong>{item.left.value}</strong>
                   </Typography>
                 </Box>
-                <Box >
+                <Box  sx={{width:"250px"}}>
                   <Typography sx={{ fontSize: "14px" }}>{item.right.title}</Typography>
                   <Typography>
                     Value: <strong>{item.right.value}</strong>
