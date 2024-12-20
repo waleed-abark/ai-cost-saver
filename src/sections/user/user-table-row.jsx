@@ -38,14 +38,15 @@ export default function UserTableRow({
     <>
       <TableRow
         sx={{
-          my: 1,
+          backgroundColor: 'white',
+          borderRadius: '25%',
         }}
       >
-        <TableCell>{session}</TableCell>
+        <TableCell sx={{ mb: 5 }}>{session}</TableCell>
         <TableCell>{invoice}</TableCell>
         <TableCell>{moment(date).format('DD MMM YYYY')}</TableCell>
 
-        <TableCell align="right">
+        <TableCell align="center">
           <IconButton onClick={handleOpenMenu}>
             <Box
               component="img"

@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import Button from '@mui/material/Button';
@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { invoices, users } from 'src/_mock/user';
+import { users, invoices } from 'src/_mock/user';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
@@ -19,8 +19,8 @@ import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
-import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -99,7 +99,16 @@ export default function UserPage() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h3">Invoice</Typography>
 
-        <Button variant="contained" color="primary" startIcon={<Iconify icon="eva:plus-fill" />}>
+        <Button
+          LinkComponent={Link}
+          to="/invoice/add"
+          variant="contained"
+          color="primary"
+          startIcon={<Iconify icon="eva:plus-fill" />}
+          sx={{
+            py: 1.5,
+          }}
+        >
           Add Invoice
         </Button>
       </Stack>
@@ -108,7 +117,7 @@ export default function UserPage() {
         <TableContainer sx={{ mb: 2 }}>
           <Table
             sx={{
-              spacing: 1,
+              spacing: 3,
             }}
           >
             <UserTableHead
@@ -125,19 +134,26 @@ export default function UserPage() {
                 { id: 'action', label: 'Action', align: 'center' },
               ]}
             />
-
+            <Box sx={{ width: '100%', my: 2 }} />
             <TableBody>
               {dataFiltered
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
-                  <UserTableRow
-                    key={row.id}
-                    selected={selected.indexOf(row.name) !== -1}
-                    handleClick={(event) => handleClick(event, row.name)}
-                    session={row.session}
-                    invoice={row.invoice}
-                    date={row.date}
-                  />
+                  <>
+                    <UserTableRow
+                      key={row.id}
+                      selected={selected.indexOf(row.name) !== -1}
+                      handleClick={(event) => handleClick(event, row.name)}
+                      session={row.session}
+                      invoice={row.invoice}
+                      date={row.date}
+                    />
+                    <Box
+                      sx={{
+                        my: 2,
+                      }}
+                    />
+                  </>
                 ))}
 
               <TableEmptyRows height={77} emptyRows={emptyRows(page, rowsPerPage, users.length)} />
@@ -150,13 +166,15 @@ export default function UserPage() {
 
       <TablePagination
         page={page}
-        justifyContent="space-between"
-        // component="div"
+        component="div"
         count={users.length}
         rowsPerPage={false}
         onPageChange={handleChangePage}
-        // rowsPerPageOptions={[5, 10, 25]}
-        // onRowsPerPageChange={handleChangeRowsPerPage}
+        rowsPerPageOptions={[5, 10, 25]}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to, count }) =>
+          `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`
+        }
       />
     </Container>
   );

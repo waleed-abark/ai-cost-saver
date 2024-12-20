@@ -1,2 +1,5 @@
 /* scrollbar */
 @import 'simplebar-react/dist/simplebar.min.css';
+thead .MuiTableHead-root {
+  border-radius: 50% !important;
+}

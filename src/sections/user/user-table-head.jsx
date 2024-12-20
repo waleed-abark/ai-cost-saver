@@ -32,7 +32,15 @@ export default function UserTableHead({
         },
       }}
     >
-      <TableRow>
+      <TableRow
+        sx={{
+          backgroundColor: 'white',
+          '& .MuiTableRow-root MuiTableRow-head ': {
+            backgroundColor: 'red !important',
+          },
+          // boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px',
+        }}
+      >
         {headLabel.map((headCell) => (
           <TableCell
             key={headCell.id}

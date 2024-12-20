@@ -137,7 +137,7 @@ Nav.propTypes = {
 function NavItem({ item }) {
   const pathname = usePathname();
 
-  const active = item.path === pathname;
+  const active = item.path.split('/')[1] === pathname.split('/')[1];
 
   return (
     <ListItemButton
