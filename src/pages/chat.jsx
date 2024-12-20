@@ -1,7 +1,6 @@
-/* eslint-disable import/no-unresolved */
 import { Helmet } from 'react-helmet-async';
 
-import { AppView } from 'src/sections/overview/view';
+import { ChatView } from 'src/sections/chat/view';
 
 // ----------------------------------------------------------------------
 
@@ -9,10 +8,10 @@ export default function AppPage() {
   return (
     <>
       <Helmet>
-        <title> AI Cost Saver </title>
+        <title> Chat | AI COST SAVER </title>
       </Helmet>
 
-      <AppView />
+      <ChatView />
     </>
   );
 }
