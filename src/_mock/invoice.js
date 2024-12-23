@@ -25,7 +25,6 @@ export const users = [...Array(24)].map((_, index) => ({
 }));
 export const invoices = [...Array(24)].map((_, index) => ({
   id: faker.string.uuid(),
-
   session: faker.person.fullName(),
   invoice: faker.number.int({ min: 1000, max: 9999 }),
   date: faker.date.past().getDate(),

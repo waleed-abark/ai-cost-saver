@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -10,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useRouter } from 'src/routes/hooks';
+import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -18,15 +20,28 @@ export default function LoginView() {
 
   const router = useRouter();
 
-  const [showPassword, setShowPassword] = useState(false);
-
   const handleClick = () => {
     router.push('/');
   };
 
-  const renderForm = (
-    <>
-      <Stack spacing={6}>
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+  });
+
+  const renderForm = ({
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  }) => (
+    <Form onSubmit={handleSubmit}>
+      <Stack spacing={3}>
         <Stack direction="column" alignItems="start" spacing={2}>
           <Typography
             variant="body1"
@@ -36,7 +51,14 @@ export default function LoginView() {
           >
             Email address
           </Typography>
-          <TextField name="email" fullWidth variant="outlined" />
+          <Field
+            name="email"
+            fullWidth
+            variant="outlined"
+            as={TextField}
+            error={errors.email && touched.email}
+            helperText={errors.email && touched.email && errors.email}
+          />
         </Stack>
         <Stack direction="column" alignItems="start" spacing={2}>
           <Typography
@@ -48,12 +70,19 @@ export default function LoginView() {
             Password
           </Typography>
 
-          <TextField fullWidth sx={{}} name="password" type="password" />
+          <Field
+            fullWidth
+            name="password"
+            type="password"
+            as={TextField}
+            error={errors.password && touched.password}
+            helperText={errors.password && touched.password && errors.password}
+          />
         </Stack>
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="flex-start" sx={{ my: 3 }}>
-        <Checkbox />
+        <Field name="remember" type="checkbox" as={Checkbox} />
 
         <Typography variant="subtitle2" underline="hover">
           Remember Password
@@ -66,12 +95,12 @@ export default function LoginView() {
         type="submit"
         variant="contained"
         color="primary"
-        onClick={handleClick}
         sx={{ my: 3 }}
+        loading={isSubmitting}
       >
         Login
       </LoadingButton>
-    </>
+    </Form>
   );
 
   return (
@@ -99,7 +128,20 @@ export default function LoginView() {
             Please enter your email and password to continue
           </Typography>
 
-          {renderForm}
+          <Formik
+            initialValues={{ email: '', password: '', remember: false }}
+            validationSchema={validationSchema}
+            onSubmit={async (values, { setSubmitting, resetForm }) => {
+              setSubmitting(true);
+              console.log(values);
+              await new Promise((resolve) => setTimeout(resolve, 500));
+              handleClick();
+              resetForm();
+              setSubmitting(false);
+            }}
+          >
+            {renderForm}
+          </Formik>
         </Card>
       </Stack>
     </Box>

@@ -1,5 +1,8 @@
 /* scrollbar */
 @import 'simplebar-react/dist/simplebar.min.css';
+body {
+  font-family: 'Nunito Sans', sans-serif !important;
+}
 thead .MuiTableHead-root {
   border-radius: 50% !important;
 }

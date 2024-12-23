@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { ProductsView } from 'src/sections/products/view';
+import { InvoiceView } from 'src/sections/invoice/view';
 
 // ----------------------------------------------------------------------
 
-export default function ProductsPage() {
+export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> Products | Minimal UI </title>
+        <title> Invoice | AI Cost Saver </title>
       </Helmet>
 
-      <ProductsView />
+      <InvoiceView />
     </>
   );
 }

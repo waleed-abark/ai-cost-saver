@@ -15,7 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import Iconify from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
-export default function UserTableRow({
+export default function InvoiceTableRow({
   selected,
 
   session,
@@ -81,7 +81,7 @@ export default function UserTableRow({
   );
 }
 
-UserTableRow.propTypes = {
+InvoiceTableRow.propTypes = {
   avatarUrl: PropTypes.any,
   company: PropTypes.any,
   handleClick: PropTypes.func,
